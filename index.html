@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lista de Presentes | Casamento de Erasto & Lorena</title>
+  <style>
+:root {
+  --bg: #0b1220;
+  --text: rgba(255,255,255,0.92);
+  --muted: rgba(255,255,255,0.68);
+  --accent: #7dd3fc;
+  --accent2: #a78bfa;
+  --border: rgba(255,255,255,0.14);
+  --shadow: 0 20px 60px rgba(0,0,0,0.45);
+  --radius: 18px;
+  --radius2: 14px;
+  --max: 1100px;
+  --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--text);
+  background: radial-gradient(1200px 700px at 30% -20%, rgba(167,139,250,0.25), transparent 60%),
+              radial-gradient(1200px 700px at 80% 0%, rgba(125,211,252,0.22), transparent 55%),
+              linear-gradient(180deg, #070b14, #0b1220 40%, #070b14);
+  min-height: 100vh;
+}
+.wrap { max-width: var(--max); margin: 0 auto; padding: 28px 18px 60px; }
+.hero {
+  display: grid;
+  gap: 16px;
+  border: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(125,211,252,0.15), rgba(167,139,250,0.10));
+  border-radius: var(--radius);
+  padding: 22px 18px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  position: relative;
+}
+.hero:before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(450px 250px at 20% 30%, rgba(125,211,252,0.22), transparent 60%),
+              radial-gradient(450px 250px at 80% 20%, rgba(167,139,250,0.22), transparent 55%);
+  pointer-events: none;
+  filter: blur(10px);
+  opacity: 0.9;
+}
+.hero > * { position: relative; }
+.kicker {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  width: fit-content;
+  background: rgba(0,0,0,0.18);
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 0.2px;
+}
+.kicker .dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  box-shadow: 0 0 0 4px rgba(125,211,252,0.10);
+}
+h1 {
+  margin: 0;
+  font-size: clamp(26px, 4.5vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.6px;
+}
+.subtitle {
+  margin: 0;
+  max-width: 70ch;
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.5;
+}
+.grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 16px;
+}
+@media (max-width: 960px) { .grid { grid-template-columns: 1fr; } }
+.panel {
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.04);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.panelHeader {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 14px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.18);
+  gap: 10px;
+}
+.panelHeader h2 { margin: 0; font-size: 15px; letter-spacing: 0.2px; color: rgba(255,255,255,0.88); }
+.panelBody { padding: 14px; }
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 720px) { .cards { grid-template-columns: 1fr; } }
+.card {
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.035));
+  border-radius: var(--radius2);
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 155px auto;
+  min-height: 265px;
+}
+.img { position: relative; background: rgba(255,255,255,0.06); overflow: hidden; }
+.img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(1.05) contrast(1.05); }
+.badge {
+  position: absolute;
+  top: 10px; left: 10px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,0.25);
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.88);
+  backdrop-filter: blur(6px);
+}
+.cardContent { padding: 12px; display: grid; gap: 10px; }
+.titleRow { display: flex; gap: 10px; justify-content: space-between; align-items: flex-start; }
+.card h3 { margin: 0; font-size: 15px; line-height: 1.25; }
+.note { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.35; }
+.controls { display: flex; gap: 10px; align-items: center; justify-content: space-between; }
+.qty {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 8px;
+  background: rgba(0,0,0,0.18);
+}
+button {
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 800;
+  letter-spacing: 0.1px;
+}
+button:hover { background: rgba(255,255,255,0.09); }
+button:active { transform: translateY(1px); }
+.qty button {
+  width: 34px; height: 34px;
+  border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+input[type="number"], input[type="text"] {
+  width: 64px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,0.18);
+  color: var(--text);
+  padding: 9px 10px;
+  outline: none;
+}
+input[type="text"] { width: 100%; }
+.price {
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 15px;
+  white-space: nowrap;
+}
+.cartList { display: grid; gap: 10px; margin: 10px 0 0; padding: 0; list-style: none; }
+.cartItem {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 10px;
+  background: rgba(255,255,255,0.03);
+  display: grid;
+  gap: 2px;
+}
+.cartItem b { font-size: 13.5px; }
+.cartItem span { color: var(--muted); font-size: 12.5px; }
+.total {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,0.18);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.total strong { font-size: 16px; }
+.muted { color: var(--muted); font-size: 12.5px; line-height: 1.35; }
+.row { display: grid; gap: 8px; }
+.cta { display: grid; gap: 10px; margin-top: 12px; }
+.primary {
+  background: linear-gradient(135deg, rgba(125,211,252,0.25), rgba(167,139,250,0.22));
+  border: 1px solid rgba(255,255,255,0.20);
+}
+.primary:hover { background: linear-gradient(135deg, rgba(125,211,252,0.32), rgba(167,139,250,0.28)); }
+.danger { background: rgba(251,113,133,0.14); border-color: rgba(251,113,133,0.35); }
+.danger:hover { background: rgba(251,113,133,0.18); }
+.box {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.03);
+  overflow: hidden;
+}
+.boxTop { padding: 14px; border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.14); }
+.boxTop h3 { margin: 0; font-size: 14px; }
+.boxBody { padding: 14px; display: grid; gap: 12px; }
+.qr {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: #fff;
+  padding: 10px;
+}
+.footer { margin-top: 18px; color: var(--muted); font-size: 12.5px; text-align: center; }
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.65);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 10px 12px;
+  color: rgba(255,255,255,0.92);
+  font-size: 13px;
+  display: none;
+  gap: 10px;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(6px);
+}
+.toast.show { display: inline-flex; }
+a.linkbtn { text-decoration: none; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="kicker"><span class="dot"></span> Site de presente de casamento</div>
+      <h1>Casamento de Erasto &amp; Lorena</h1>
+      <p class="subtitle">
+        Dia <b>07/02/2026</b>. Obrigado por fazer parte desse momento!
+        Escolha um presente (ou mais) e depois siga para a página de pagamento (Pix).
+      </p>
+    </header>
+
+    <main class="grid" aria-label="Lista de presentes">
+      <section class="panel" aria-label="Presentes">
+        <div class="panelHeader">
+          <h2>Escolha os presentes</h2>
+          <div class="muted">Selecione a quantidade (1, 2, 3...)</div>
+        </div>
+        <div class="panelBody">
+          <div id="cards" class="cards"></div>
+        </div>
+      </section>
+
+      <aside class="panel" aria-label="Resumo">
+        <div class="panelHeader">
+          <h2>Seu presente</h2>
+          <button class="danger" id="clearBtn" type="button">Limpar</button>
+        </div>
+        <div class="panelBody">
+          <div class="row">
+            <label for="buyerName" class="muted"><b>Seu nome (para sabermos quem comprou)</b></label>
+            <input id="buyerName" type="text" placeholder="Ex: João Silva" autocomplete="name" />
+          </div>
+
+          <ul id="cartList" class="cartList" aria-label="Itens selecionados"></ul>
+
+          <div class="total" aria-label="Total">
+            <span class="muted"><b>Total</b></span>
+            <strong id="total">R$ 0,00</strong>
+          </div>
+
+          <div class="cta">
+            <button class="primary" id="payBtn" type="button">Continuar para pagamento (Pix)</button>
+            <button id="copySummaryBtn" type="button">Copiar resumo</button>
+          </div>
+
+          <p class="muted" style="margin-top:12px;">
+            Na próxima página você verá o <b>Pix</b> e o <b>valor total</b> escolhido, e poderá enviar o comprovante no WhatsApp.
+          </p>
+
+          <div class="footer">Feito com carinho para nossos convidados 💙</div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Ok!</div>
+
+  <script>
+    const ITEMS = [{"id": "disney", "title": "Ingressos para Disney", "price": 650, "img": "https://source.unsplash.com/1200x800/?disney,castle", "note": "Ajuda para curtir os parques!"}, {"id": "cafe", "title": "Café da manhã", "price": 250, "img": "https://source.unsplash.com/1200x800/?breakfast,coffee", "note": "Um café caprichado na lua de mel."}, {"id": "passagem", "title": "Ajuda na passagem aérea para lua de mel (EUA)", "price": 500, "img": "https://source.unsplash.com/1200x800/?airplane,usa", "note": "Contribuição para as passagens."}, {"id": "carro", "title": "Aluguel de carro nos EUA (Dodge Ram 1500)", "price": 500, "img": "https://source.unsplash.com/1200x800/?dodge,ram,truck", "note": "Para passear com conforto!"}, {"id": "almoco", "title": "Almoço em Orlando", "price": 300, "img": "https://source.unsplash.com/1200x800/?lunch,restaurant", "note": "Uma refeição especial."}, {"id": "seaworld", "title": "Ingresso para o SeaWorld", "price": 500, "img": "https://source.unsplash.com/1200x800/?seaworld,orlando", "note": "Mais um parque no roteiro!"}, {"id": "jantar", "title": "Jantar em Orlando", "price": 500, "img": "https://source.unsplash.com/1200x800/?dinner,restaurant", "note": "Um jantar romântico."}, {"id": "hotel", "title": "Diária de hotel (Orlando)", "price": 450, "img": "https://source.unsplash.com/1200x800/?hotel,room", "note": "Ajuda com hospedagem."}, {"id": "seguro", "title": "Seguro viagem (EUA)", "price": 350, "img": "https://source.unsplash.com/1200x800/?travel,insurance", "note": "Para viajar tranquilo(a)."}, {"id": "compras", "title": "Lembrancinhas e souvenirs", "price": 200, "img": "https://source.unsplash.com/1200x800/?souvenirs,gifts", "note": "Mimos da viagem."}, {"id": "passeio", "title": "Passeio especial (Orlando)", "price": 400, "img": "https://source.unsplash.com/1200x800/?orlando,attraction", "note": "Experiência extra no roteiro."}, {"id": "uber", "title": "Transporte (Uber/estacionamentos)", "price": 150, "img": "https://source.unsplash.com/1200x800/?orlando,transport", "note": "Ajuda com deslocamentos."}, {"id": "lanchinhos", "title": "Lanchinhos nos parques", "price": 180, "img": "https://source.unsplash.com/1200x800/?snacks,theme park", "note": "Para repor as energias no passeio."}];
+    const fmtBRL = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+    const state = {
+      qty: Object.fromEntries(ITEMS.map(i => [i.id, 0])),
+    };
+
+    const cardsEl = document.getElementById('cards');
+    const cartListEl = document.getElementById('cartList');
+    const totalEl = document.getElementById('total');
+    const buyerNameEl = document.getElementById('buyerName');
+
+    function toast(text) {
+      const t = document.getElementById('toast');
+      t.textContent = text || 'Ok!';
+      t.classList.add('show');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => t.classList.remove('show'), 1600);
+    }
+
+    function clampInt(n) {
+      const x = Number.parseInt(n, 10);
+      if (Number.isNaN(x) || x < 0) return 0;
+      if (x > 99) return 99;
+      return x;
+    }
+
+    function renderCards() {
+      cardsEl.innerHTML = '';
+      ITEMS.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        const img = document.createElement('div');
+        img.className = 'img';
+
+        const imgtag = document.createElement('img');
+        imgtag.loading = 'lazy';
+        imgtag.alt = item.title;
+        imgtag.src = item.img;
+        img.appendChild(imgtag);
+
+        const badge = document.createElement('div');
+        badge.className = 'badge';
+        badge.textContent = fmtBRL(item.price);
+        img.appendChild(badge);
+
+        const content = document.createElement('div');
+        content.className = 'cardContent';
+
+        const titleRow = document.createElement('div');
+        titleRow.className = 'titleRow';
+
+        const h3 = document.createElement('h3');
+        h3.textContent = item.title;
+
+        const price = document.createElement('div');
+        price.className = 'price';
+        price.textContent = fmtBRL(item.price);
+
+        titleRow.appendChild(h3);
+        titleRow.appendChild(price);
+
+        const note = document.createElement('p');
+        note.className = 'note';
+        note.textContent = item.note || '';
+
+        const controls = document.createElement('div');
+        controls.className = 'controls';
+
+        const qty = document.createElement('div');
+        qty.className = 'qty';
+
+        const minus = document.createElement('button');
+        minus.type = 'button';
+        minus.setAttribute('aria-label', 'Diminuir');
+        minus.textContent = '−';
+        minus.addEventListener('click', () => {
+          state.qty[item.id] = Math.max(0, state.qty[item.id] - 1);
+          update();
+        });
+
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.min = '0';
+        input.max = '99';
+        input.value = '0';
+        input.inputMode = 'numeric';
+        input.addEventListener('input', () => {
+          state.qty[item.id] = clampInt(input.value);
+          update();
+        });
+
+        const plus = document.createElement('button');
+        plus.type = 'button';
+        plus.setAttribute('aria-label', 'Aumentar');
+        plus.textContent = '+';
+        plus.addEventListener('click', () => {
+          state.qty[item.id] = Math.min(99, state.qty[item.id] + 1);
+          update();
+        });
+
+        qty.appendChild(minus);
+        qty.appendChild(input);
+        qty.appendChild(plus);
+
+        const addOne = document.createElement('button');
+        addOne.type = 'button';
+        addOne.textContent = 'Adicionar 1';
+        addOne.addEventListener('click', () => {
+          state.qty[item.id] = Math.min(99, state.qty[item.id] + 1);
+          update();
+        });
+
+        controls.appendChild(qty);
+        controls.appendChild(addOne);
+
+        content.appendChild(titleRow);
+        content.appendChild(note);
+        content.appendChild(controls);
+
+        card.appendChild(img);
+        card.appendChild(content);
+
+        card.__qtyInput = input;
+        card.__itemId = item.id;
+
+        cardsEl.appendChild(card);
+      });
+    }
+
+    function computeCart() {
+      const selected = ITEMS
+        .map(i => ({...i, q: state.qty[i.id] || 0}))
+        .filter(i => i.q > 0);
+      const total = selected.reduce((acc, i) => acc + i.q * i.price, 0);
+      return { selected, total };
+    }
+
+    function renderCart() {
+      const { selected, total } = computeCart();
+
+      // Sync inputs
+      [...cardsEl.children].forEach(card => {
+        if (card.__qtyInput && card.__itemId) {
+          card.__qtyInput.value = state.qty[card.__itemId] || 0;
+        }
+      });
+
+      cartListEl.innerHTML = '';
+      if (selected.length === 0) {
+        const li = document.createElement('li');
+        li.className = 'cartItem';
+        li.innerHTML = `<b>Nenhum presente selecionado</b><span>Escolha um ou mais itens na lista.</span>`;
+        cartListEl.appendChild(li);
+      } else {
+        selected.forEach(i => {
+          const li = document.createElement('li');
+          li.className = 'cartItem';
+          const subtotal = i.q * i.price;
+          li.innerHTML = `<b>${i.q}× ${i.title}</b><span>${fmtBRL(i.price)} cada • Subtotal: ${fmtBRL(subtotal)}</span>`;
+          cartListEl.appendChild(li);
+        });
+      }
+
+      totalEl.textContent = fmtBRL(total);
+    }
+
+    function buildSummaryText() {
+      const name = (buyerNameEl.value || '').trim();
+      const { selected, total } = computeCart();
+      const lines = [];
+      if (name) lines.push(`Nome: ${name}`);
+      selected.forEach(i => lines.push(`- ${i.q}× ${i.title} (${fmtBRL(i.price)} cada)`));
+      lines.push(`Total: ${fmtBRL(total)}`);
+      return lines.join('\n');
+    }
+
+    async function copyToClipboard(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        toast('Copiado!');
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        toast('Copiado!');
+      }
+    }
+
+    function proceedToPayment() {
+      const name = (buyerNameEl.value || '').trim();
+      const { selected, total } = computeCart();
+
+      if (!name) {
+        toast('Digite seu nome.');
+        return;
+      }
+      if (selected.length === 0) {
+        toast('Selecione ao menos um presente.');
+        return;
+      }
+
+      const payload = {
+        buyerName: name,
+        items: selected.map(i => ({ id: i.id, title: i.title, price: i.price, q: i.q })),
+        total: total,
+        updatedAt: new Date().toISOString()
+      };
+
+      localStorage.setItem('gift_checkout', JSON.stringify(payload));
+      window.location.href = './pagamento.html';
+    }
+
+    document.getElementById('payBtn').addEventListener('click', proceedToPayment);
+
+    document.getElementById('copySummaryBtn').addEventListener('click', async () => {
+      const { selected } = computeCart();
+      if (selected.length === 0) {
+        toast('Selecione ao menos um presente.');
+        return;
+      }
+      await copyToClipboard(buildSummaryText());
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      Object.keys(state.qty).forEach(k => state.qty[k] = 0);
+      renderCart();
+      toast('Limpo!');
+    });
+
+    renderCards();
+    renderCart();
+  </script>
+</body>
+</html>
